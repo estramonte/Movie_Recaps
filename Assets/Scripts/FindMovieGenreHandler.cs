@@ -11,8 +11,12 @@ public class FindMovieGenreHandler : MonoBehaviour
     public TMP_Dropdown Genre2;
     public TMP_Dropdown Genre3;
 
-    private List<string> allGenres = new List<string> { "Romance", "Comedy", "Horror", "Thriller", "Adventure", "Action", "Drama" };
-
+    private List<string> allGenres = new List<string>
+    {
+        "Action", "Adventure", "Animation", "Comedy", "Crime", "Drama", "Fantasy", "Family", "Fiction", "International",
+        "Horror", "Mystery", "Romance", "SciFi", "Thriller", "TeleFilm", "Documentary", "History", "Music", "War",
+        "Western"
+    };
     void Start()
     {
         InitializeDropdown(Genre1, allGenres);

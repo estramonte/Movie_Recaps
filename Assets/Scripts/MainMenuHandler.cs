@@ -8,6 +8,7 @@ using TMPro;
 public class MainMenuHandler : MonoBehaviour
 {
     public TMP_InputField MovieSearch;
+    public static string MovieSearchQuery; // Static variable to pass the search query to the next scene
 
     public void onMovieRecapsLogoButtonClick()
     {
@@ -16,9 +17,11 @@ public class MainMenuHandler : MonoBehaviour
 
     public void onSearchButtonClick()
     {
-        string movieSearch = MovieSearch.text;
+        MovieSearchQuery = MovieSearch.text;
+        Debug.Log("Search Query: " + MovieSearchQuery); // Check the value being set
         SceneManager.LoadScene("Search Results");
     }
+
 
     public void onMoviesToWatchButtonClick()
     {

@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 
 public class DisplayData : MonoBehaviour
 {
@@ -17,45 +20,31 @@ public class DisplayData : MonoBehaviour
     }
 
     private void PopulateDataRows() {
-        // Example data
-        dataRows = new List<Dictionary<string, string>> {
-            new Dictionary<string, string> {
-                {"Name", "Alice"},
-                {"Age", "29"},
-                // More data...
-            },
-            new Dictionary<string, string> {
-                {"Name", "Bob"},
-                {"Age", "35"},
-                {"Hair Color", "Brown"},
-                // More data...
-            },
-            new Dictionary<string, string> {
-                {"Name", "Mark"},
-                {"Hair Color", "Red"},
-                // More data...
-            },
-            new Dictionary<string, string> {
-                {"Name", "Clark"},
-                {"Age", "20"},
-                {"DOB", "2005-06-06"},
-                // More data...
-            },
-            new Dictionary<string, string> {
-                {"Name", "Alex"},
-                {"Age", "9"},
-                {"DOB", "2003-03-03"}
-                // More data...
-            },
-            new Dictionary<string, string> {
-                {"Name", "Lina"},
-                {"Age", "43"},
-                {"Hair Color", "Blonde"},
-                {"DOB", "1985-05-05"}
-                // More data...
-            }
-            // Add more rows as needed
-        };
+        string jsonData = @"{
+            'message': 'Movies fetched successfully',
+            'result': [
+                // ... (Your JSON data goes here)
+            ]
+        }";
+
+        JObject parsedData = JObject.Parse(jsonData);
+        JArray movies = (JArray)parsedData["result"];
+        
+        dataRows = new List<Dictionary<string, string>>();
+
+        foreach (JObject movie in movies) {
+            var row = new Dictionary<string, string>();
+            row.Add("ID", movie["id"].ToString());
+            row.Add("Language", movie["original_language"].ToString());
+            row.Add("Overview", movie["overview"].ToString());
+            row.Add("Poster Path", movie["poster_path"].ToString());
+            row.Add("Release Date", DateTime.Parse(movie["release_date"].ToString()).ToString("yyyy-MM-dd"));
+            row.Add("Revenue", movie["revenue"].ToString());
+            row.Add("Tagline", movie["tagline"]?.ToString() ?? "N/A");
+            row.Add("Title", movie["title"].ToString());
+
+            dataRows.Add(row);
+        }
     }
 
     private void CreateDynamicGrid() {
@@ -84,4 +73,28 @@ public class DisplayData : MonoBehaviour
         var cell = Instantiate(cellPrefab, gridLayoutGroup.transform);
         cell.GetComponentInChildren<TextMeshProUGUI>().text = text;
     }
+    
+    public void ProcessJsonData(string jsonData)
+    {
+        JObject parsedData = JObject.Parse(jsonData);
+        JArray movies = parsedData["result"] as JArray;
+
+        if (movies == null || !movies.Any())
+        {
+            Debug.LogError("No movies found or JSON format is incorrect: " + jsonData);
+            return; // Exit if there are no movies to display
+        }
+
+        dataRows.Clear(); // Clear existing data
+
+        foreach (JObject movie in movies)
+        {
+            var row = new Dictionary<string, string>();
+            // ... populate the row as shown previously
+            dataRows.Add(row);
+        }
+
+        CreateDynamicGrid(); // Call the method that creates the UI grid
+    }
+
 }
