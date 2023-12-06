@@ -17,7 +17,7 @@ public class SearchResultsHandler : MonoBehaviour
 
     private IEnumerator GetMoviesData(string movieSearch)
     {
-        string url = "http://192.168.1.26:3000/api/movies/search?name=" + UnityWebRequest.EscapeURL(movieSearch);
+        string url = "http://10.208.138.164:3000/api/movies/search?name=" + UnityWebRequest.EscapeURL(movieSearch);
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             yield return webRequest.SendWebRequest();

@@ -12,11 +12,11 @@ public class DisplayData : MonoBehaviour
     public GameObject cellPrefab; // Assign in inspector
     public GridLayoutGroup gridLayoutGroup; // Assign in inspector
 
-    private List<Dictionary<string, string>> dataRows; // Populate with actual data
+    private List<Dictionary<string, string>> dataRows = new List<Dictionary<string, string>>();
 
     private void Start() {
-        PopulateDataRows(); // Assuming this populates dataRows with your actual data
-        CreateDynamicGrid();
+        //PopulateDataRows(); // Assuming this populates dataRows with your actual data
+        //CreateDynamicGrid();
     }
 
     private void PopulateDataRows() {
@@ -47,32 +47,53 @@ public class DisplayData : MonoBehaviour
         }
     }
 
-    private void CreateDynamicGrid() {
-        // Get all unique keys from dataRows to use as headers
-        var headers = new HashSet<string>(dataRows.SelectMany(dict => dict.Keys)).ToList();
+    private void CreateDynamicGrid() 
+    {
+        // Define the headers in the order you want them
+        var headers = new List<string> 
+        {
+            "Title", "Overview", "Release Date", "Language", "Tagline"
+        };
 
         // Configure GridLayoutGroup based on the number of headers
         gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         gridLayoutGroup.constraintCount = headers.Count;
 
-        // Instantiate header cells
-        foreach (var header in headers) {
+        // Instantiate header cells in order
+        foreach (var header in headers) 
+        {
             InstantiateCell(header);
         }
 
-        // Instantiate data cells
-        foreach (var row in dataRows) {
-            foreach (var header in headers) {
-                string cellValue = row.TryGetValue(header, out var value) ? value : "NULL";
-                InstantiateCell(cellValue);
+        // Instantiate data cells in order
+        foreach (var row in dataRows) 
+        {
+            foreach (var header in headers) 
+            {
+                if (row.TryGetValue(header, out var value)) 
+                {
+                    InstantiateCell(value);
+                } 
+                else 
+                {
+                    InstantiateCell("N/A"); // Or however you wish to handle missing data
+                }
             }
         }
     }
 
+
     private void InstantiateCell(string text) {
+        Debug.Log($"Instantiating cell with text: {text}"); // This will print each cell's text to the console
         var cell = Instantiate(cellPrefab, gridLayoutGroup.transform);
         cell.GetComponentInChildren<TextMeshProUGUI>().text = text;
+        if(cell.activeInHierarchy) {
+            Debug.Log($"Cell instantiated and active with text: {text}");
+        } else {
+            Debug.LogError($"Cell instantiated but not active with text: {text}");
+        }
     }
+
     
     public void ProcessJsonData(string jsonData)
     {
@@ -90,11 +111,21 @@ public class DisplayData : MonoBehaviour
         foreach (JObject movie in movies)
         {
             var row = new Dictionary<string, string>();
-            // ... populate the row as shown previously
+            row.Add("ID", movie["id"].ToString());
+            row.Add("Language", movie["original_language"].ToString());
+            row.Add("Overview", movie["overview"].ToString());
+            row.Add("Poster Path", movie["poster_path"].ToString());
+            row.Add("Release Date", DateTime.Parse(movie["release_date"].ToString()).ToString("yyyy-MM-dd"));
+            row.Add("Revenue", movie["revenue"].ToString());
+            row.Add("Tagline", movie["tagline"]?.ToString() ?? "N/A");
+            row.Add("Title", movie["title"].ToString());
+
             dataRows.Add(row);
         }
 
         CreateDynamicGrid(); // Call the method that creates the UI grid
     }
 
+
 }
+

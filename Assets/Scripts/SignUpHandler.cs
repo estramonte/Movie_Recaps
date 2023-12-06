@@ -12,7 +12,7 @@ public class SignUpHandler : MonoBehaviour
     public TMP_InputField passwordInputField;
 
     // URL to which you'll send the sign-up request
-    private string signUpUrl = "http://192.168.1.26:3000/api/users/signup"; // Update with your actual server URL
+    private string signUpUrl = "http://10.208.138.164:3000/api/users/signup"; // Update with your actual server URL
 
     public void onSignUpSubmitButtonClicked()
     {
