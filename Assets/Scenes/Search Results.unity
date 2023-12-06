@@ -2026,7 +2026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2363,7 +2363,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 713046636}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999751
+  m_Size: 0.9999098
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3372,6 +3372,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2131910269}
   - component: {fileID: 2131910268}
+  - component: {fileID: 2131910270}
   m_Layer: 0
   m_Name: SCRIPTS
   m_TagString: Untagged
@@ -3407,6 +3408,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2131910270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131910267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c1f8ac75f0f47e7adf7898bd4e8728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayDataScript: {fileID: 2141696223}
 --- !u!1 &2141696222
 GameObject:
   m_ObjectHideFlags: 0
@@ -3459,9 +3473,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 28808045}
   - {fileID: 1320599176}
-  - {fileID: 2141696224}
   - {fileID: 982994612}
   - {fileID: 2014921893}
   - {fileID: 1696748632}
   - {fileID: 2046225765}
   - {fileID: 2131910269}
+  - {fileID: 2141696224}

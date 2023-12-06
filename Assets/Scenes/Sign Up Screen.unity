@@ -3640,7 +3640,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MM/DD/YYYY
+  m_text: YYYY-  MM-  DD
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b26f2d2036b743d581678572508c909, type: 2}
   m_sharedMaterial: {fileID: -3799678097681967946, guid: 5b26f2d2036b743d581678572508c909, type: 2}
