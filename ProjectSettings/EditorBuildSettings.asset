@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Find a Movie - G.unity
     guid: 37e3fa5124bd5403891e343090bfd81a
+  - enabled: 1
+    path: Assets/PlayGroundScene/PlayGroundScene.unity
+    guid: f80375bc81c374037ac93a7530f4d4e3
   m_configObjects: {}
