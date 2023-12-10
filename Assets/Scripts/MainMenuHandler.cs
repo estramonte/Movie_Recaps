@@ -48,4 +48,14 @@ public class MainMenuHandler : MonoBehaviour
     {
         SceneManager.LoadScene("Profile");
     }
+
+    public void onLogoutButtonClick()
+    {
+        ProfileHandler.User.id = string.Empty;
+        ProfileHandler.User.username = string.Empty;
+        ProfileHandler.User.password = string.Empty;
+        ProfileHandler.User.dob = string.Empty;
+        ProfileHandler.User.email = string.Empty;
+        SceneManager.LoadScene("Title Screen");
+    }
 }

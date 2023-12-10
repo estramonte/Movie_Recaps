@@ -565,7 +565,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2131910268}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
         m_MethodName: onProfileButtonClick
         m_Mode: 1
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2131910268}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
         m_MethodName: onMoviesToWatchButtonClick
         m_Mode: 1
@@ -1055,7 +1055,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2131910268}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
         m_MethodName: onSearchButtonClick
         m_Mode: 1
@@ -1510,7 +1510,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 713046636}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99988705
+  m_Size: 0.99977
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1636,7 +1636,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2131910268}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
         m_MethodName: onMoviesWatchedButtonClick
         m_Mode: 1
@@ -3451,6 +3451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 4430340126150210081, guid: 2a7ed374ce9e346edbb29ed5bbc5a9c7, type: 3}
+  buttonCellPrefab: {fileID: 5713866310650097251, guid: fa6a1ef965c574578b19786fe566c613, type: 3}
   gridLayoutGroup: {fileID: 523988533}
 --- !u!4 &2141696224
 Transform:

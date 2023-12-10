@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PlayGroundScene/PlayGroundScene.unity
     guid: f80375bc81c374037ac93a7530f4d4e3
+  - enabled: 1
+    path: Assets/Scenes/Your Reviews.unity
+    guid: 065b06cfad6094e5ea7e14969a0a8a3a
+  - enabled: 1
+    path: Assets/Scenes/Movie Listing.unity
+    guid: a406675f64d0440258ada896d024690e
   m_configObjects: {}

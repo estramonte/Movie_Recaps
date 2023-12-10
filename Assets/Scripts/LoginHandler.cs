@@ -6,8 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class LoginHandler : MonoBehaviour
 {
+    // Example of a class to represent the JSON data structure
+    [System.Serializable]
+    public class LoginResponse
+    {
+        public string message;
+        public Result result;
+    }
+
+    [System.Serializable]
+    public class Result
+    {
+        public string id;
+        public string username;
+        public string password; // Consider security implications
+        public string email;
+        public string dob;
+    }
+
     public TMP_InputField usernameInputField;
     public TMP_InputField passwordInputField;
+    
+    private string id;
+    private string username;
+    private string password;
+    private string dob;
+    private string email;
 
     // URL to which you'll send the login request
     private string loginUrl = "http://localhost:3000/api/users/login"; // Update with your actual server URL
@@ -54,9 +78,22 @@ public class LoginHandler : MonoBehaviour
 
     private void ProcessLoginResponse(string jsonData)
     {
-        // Here you would parse the JSON data and extract the info you need
-        // For example, you could decode it to a C# object using JsonUtility or another JSON library
         Debug.Log("Received JSON data: " + jsonData);
-        // Add your JSON processing here
+
+   
+    // Deserialize the JSON data
+    LoginResponse response = JsonUtility.FromJson<LoginResponse>(jsonData);
+
+        // Validate and assign data
+        if(response != null && response.result != null)
+    {
+        ProfileHandler.User.id = response.result.id;
+        ProfileHandler.User.username = response.result.username;
+        // Consider security implications for password
+        ProfileHandler.User.password = response.result.password;
+        ProfileHandler.User.dob = response.result.dob;
+        ProfileHandler.User.email = response.result.email;
     }
+}
+
 }
