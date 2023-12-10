@@ -10,7 +10,7 @@ public class LoginHandler : MonoBehaviour
     public TMP_InputField passwordInputField;
 
     // URL to which you'll send the login request
-    private string loginUrl = "http://10.208.138.164:3000/api/users/login"; // Update with your actual server URL
+    private string loginUrl = "http://localhost:3000/api/users/login"; // Update with your actual server URL
 
     public void onLoginSubmitButtonClicked()
     {

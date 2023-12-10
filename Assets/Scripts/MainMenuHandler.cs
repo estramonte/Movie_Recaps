@@ -19,6 +19,7 @@ public class MainMenuHandler : MonoBehaviour
     {
         MovieSearchQuery = MovieSearch.text;
         Debug.Log("Search Query: " + MovieSearchQuery); // Check the value being set
+        SearchResultsHandler.SceneChangeManager.LastCaller = "MainMenuHandler";
         SceneManager.LoadScene("Search Results");
     }
 
