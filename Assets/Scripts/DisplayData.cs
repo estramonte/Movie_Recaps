@@ -6,10 +6,13 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class DisplayData : MonoBehaviour
 {
     public GameObject cellPrefab; // Assign in inspector
+    public GameObject buttonCellPrefab;
     public GridLayoutGroup gridLayoutGroup; // Assign in inspector
 
     private List<Dictionary<string, string>> dataRows = new List<Dictionary<string, string>>();
@@ -72,16 +75,34 @@ public class DisplayData : MonoBehaviour
             {
                 if (row.TryGetValue(header, out var value)) 
                 {
-                    InstantiateCell(value);
+                    if (header == "Title") {
+                        // Instantiate a button prefab instead of a regular cell
+                        InstantiateButtonCell(value, JObject.FromObject(row));
+                    } else {
+                        // For non-button cells, use the regular method
+                        InstantiateCell(value);
+                    }
                 } 
                 else 
                 {
-                    InstantiateCell("N/A"); // Or however you wish to handle missing data
+                    InstantiateCell("N/A");
                 }
             }
         }
     }
 
+    private void InstantiateButtonCell(string text, JObject movieData) {
+        var buttonCell = Instantiate(buttonCellPrefab, gridLayoutGroup.transform);
+        var textComponent = buttonCell.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComponent != null) {
+            textComponent.text = text;
+        }
+        var button = buttonCell.GetComponent<Button>();
+        if (button != null) {
+            Debug.Log("Movie Data: " + movieData);
+            button.onClick.AddListener(() => LoadSceneAndSaveData(movieData));
+        }
+    }
 
     private void InstantiateCell(string text) {
         Debug.Log($"Instantiating cell with text: {text}"); // This will print each cell's text to the console
@@ -126,6 +147,19 @@ public class DisplayData : MonoBehaviour
         CreateDynamicGrid(); // Call the method that creates the UI grid
     }
 
+    private void LoadSceneAndSaveData(JObject movie) {
+        if (movie != null) {
+            MovieListingHandler.Movie.name = movie["Title"].ToString();
+            MovieListingHandler.Movie.id = movie["ID"].ToString();
+            MovieListingHandler.Movie.description = movie["Overview"].ToString();
+            MovieListingHandler.Movie.posterPath = "https://image.tmdb.org/t/p/w500" + movie["Poster Path"].ToString();
+            MovieListingHandler.Movie.releaseDate = DateTime.Parse(movie["Release Date"].ToString()).ToString("yyyy-MM-dd");
+        } else {
+            Debug.LogError("Movie data is null");
+        }
 
+        // Load the "Movie Listing" scene
+        SceneManager.LoadScene("Movie Listing");
+    }
 }
 

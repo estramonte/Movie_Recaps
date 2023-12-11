@@ -19,6 +19,7 @@ public class MainMenuHandler : MonoBehaviour
     {
         MovieSearchQuery = MovieSearch.text;
         Debug.Log("Search Query: " + MovieSearchQuery); // Check the value being set
+        SearchResultsHandler.SceneChangeManager.LastCaller = "MainMenuHandler";
         SceneManager.LoadScene("Search Results");
     }
 
@@ -46,5 +47,20 @@ public class MainMenuHandler : MonoBehaviour
     public void onProfileButtonClick()
     {
         SceneManager.LoadScene("Profile");
+    }
+
+    public void onLogoutButtonClick()
+    {
+        ProfileHandler.User.id = string.Empty;
+        ProfileHandler.User.username = string.Empty;
+        ProfileHandler.User.password = string.Empty;
+        ProfileHandler.User.dob = string.Empty;
+        ProfileHandler.User.email = string.Empty;
+        SceneManager.LoadScene("Title Screen");
+    }
+
+    public void onAddMovieButtonClick()
+    {
+        SceneManager.LoadScene("Add A Movie");
     }
 }

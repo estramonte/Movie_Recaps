@@ -15,5 +15,7 @@ public class TitleScreenController : MonoBehaviour
     {
         SceneManager.LoadScene("Sign Up Screen");
     }
+    
+    
 }
 
