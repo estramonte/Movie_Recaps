@@ -150,8 +150,9 @@ public class DisplayData : MonoBehaviour
     private void LoadSceneAndSaveData(JObject movie) {
         if (movie != null) {
             MovieListingHandler.Movie.name = movie["Title"].ToString();
+            MovieListingHandler.Movie.id = movie["ID"].ToString();
             MovieListingHandler.Movie.description = movie["Overview"].ToString();
-            //MovieListingHandler.Movie.posterPath = "https://www.dvdplanetstore.pk/wp-content/uploads/2017/12" + movie["Poster Path"].ToString();
+            MovieListingHandler.Movie.posterPath = "https://image.tmdb.org/t/p/w500" + movie["Poster Path"].ToString();
             MovieListingHandler.Movie.releaseDate = DateTime.Parse(movie["Release Date"].ToString()).ToString("yyyy-MM-dd");
         } else {
             Debug.LogError("Movie data is null");

@@ -58,4 +58,9 @@ public class MainMenuHandler : MonoBehaviour
         ProfileHandler.User.email = string.Empty;
         SceneManager.LoadScene("Title Screen");
     }
+
+    public void onAddMovieButtonClick()
+    {
+        SceneManager.LoadScene("Add A Movie");
+    }
 }

@@ -16,6 +16,12 @@ public class ProfileHandler : MonoBehaviour
         public static string email = string.Empty;
     }
 
+    public GameObject ProfileCanvas;
+    public GameObject UpdateInformationCanvas;
+
+    public TextMeshProUGUI AreYouSure;
+    public Image areyousureBackground;
+
     public TextMeshProUGUI bigUsername;
     public TextMeshProUGUI id;
     public TextMeshProUGUI smallusername;
@@ -26,6 +32,10 @@ public class ProfileHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AreYouSure.text = " ";
+        areyousureBackground.enabled = false;
+        ProfileCanvas.SetActive(true);
+        UpdateInformationCanvas.SetActive(false);
         DisplayUserInformation();
     }
 
@@ -44,5 +54,47 @@ public class ProfileHandler : MonoBehaviour
     public void onViewReviewsButton()
     {
         SceneManager.LoadScene("Your Reviews");
+    }
+
+    public void onUpdateUserInformationButton()
+    {
+        ProfileCanvas.SetActive(false);
+        UpdateInformationCanvas.SetActive(true);
+        
+        // ask user to click buttons of attributes they want to update
+        // have them input new information
+    }
+
+    public void onDeleteAccountButton()
+    {
+        AreYouSure.text = "Are You Sure?";
+        areyousureBackground.enabled = true;
+        
+        // set yes and no buttons active
+    }
+
+    public void onYesButton()
+    {
+        // delete account
+        
+        
+        User.id = string.Empty;
+        User.username = string.Empty;
+        User.password = string.Empty;
+        User.dob = string.Empty;
+        User.email = string.Empty;
+        SceneManager.LoadScene("Title Screen");
+    }
+
+    public void onNoButton()
+    {
+        AreYouSure.text = " ";
+        areyousureBackground.enabled = false;
+        // set yes and no buttons inactive
+    }
+
+    public void onDownloadWatchlist()
+    {
+        // download watchlist to a csv file
     }
 }

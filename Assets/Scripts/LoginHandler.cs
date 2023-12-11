@@ -46,6 +46,11 @@ public class LoginHandler : MonoBehaviour
         StartCoroutine(LoginUser(username, password));
     }
 
+    public void onBackToTitleScreen()
+    {
+        SceneManager.LoadScene("Title Screen");
+    }
+
     private IEnumerator LoginUser(string username, string password)
     {
         // Create a form and add the fields
@@ -89,7 +94,6 @@ public class LoginHandler : MonoBehaviour
     {
         ProfileHandler.User.id = response.result.id;
         ProfileHandler.User.username = response.result.username;
-        // Consider security implications for password
         ProfileHandler.User.password = response.result.password;
         ProfileHandler.User.dob = response.result.dob;
         ProfileHandler.User.email = response.result.email;

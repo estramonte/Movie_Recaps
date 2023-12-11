@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+
 public class SearchResultsHandler : MonoBehaviour
 {
     public static class SceneChangeManager

@@ -6,6 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class SignUpHandler : MonoBehaviour
 {
+    // Example of a class to represent the JSON data structure
+    [System.Serializable]
+    public class SignUpResponse
+    {
+        public string message;
+        public Result result;
+    }
+
+    [System.Serializable]
+    public class Result
+    {
+        public string id;
+        public string username;
+        public string password; // Consider security implications
+        public string email;
+        public string dob;
+    }
     public TMP_InputField EmailInputField;
     public TMP_InputField DOBInputField;
     public TMP_InputField usernameInputField;
@@ -56,12 +73,27 @@ public class SignUpHandler : MonoBehaviour
             }
         }
     }
+    
+    public void onBackToTitleScreen()
+    {
+        SceneManager.LoadScene("Title Screen");
+    }
 
     private void ProcessSignUpResponse(string jsonData)
     {
-        // Here you would parse the JSON data and extract the info you need
         Debug.Log("Received JSON data: " + jsonData);
-        // Add your JSON processing here
-        // For example, you could decode it to a C# object using JsonUtility or another JSON library
+        
+        // Deserialize the JSON data
+        SignUpResponse response = JsonUtility.FromJson<SignUpResponse>(jsonData);
+
+        // Validate and assign data
+        if(response != null && response.result != null)
+        {
+            ProfileHandler.User.id = response.result.id;
+            ProfileHandler.User.username = response.result.username;
+            ProfileHandler.User.password = response.result.password;
+            ProfileHandler.User.dob = response.result.dob;
+            ProfileHandler.User.email = response.result.email;
+        }
     }
 }
