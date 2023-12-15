@@ -59,8 +59,8 @@ public class MainMenuHandler : MonoBehaviour
         SceneManager.LoadScene("Title Screen");
     }
 
-    public void onAddMovieButtonClick()
+    public void onSearchByActorOrDirectorButton()
     {
-        SceneManager.LoadScene("Add A Movie");
+        SceneManager.LoadScene("Search Movie By Actor or Director");
     }
 }

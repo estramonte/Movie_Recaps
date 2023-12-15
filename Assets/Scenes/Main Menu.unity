@@ -1272,7 +1272,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315.4, y: -28.34}
+  m_AnchoredPosition: {x: -315.4, y: 68.11}
   m_SizeDelta: {x: 475.4, y: 154.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1211765448
@@ -1643,12 +1643,12 @@ GameObject:
   - component: {fileID: 1309525396}
   - component: {fileID: 1309525395}
   m_Layer: 5
-  m_Name: Add a Movie
+  m_Name: Search Movie By Actor or Director
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1309525394
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1667,7 +1667,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -153.8}
-  m_SizeDelta: {x: 475.4, y: 154.5}
+  m_SizeDelta: {x: 549.1, y: 197.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309525395
 MonoBehaviour:
@@ -1715,7 +1715,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2090802866}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
-        m_MethodName: onReviewAMovieButtonClick
+        m_MethodName: onSearchByActorOrDirectorButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1975,7 +1975,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Add a Movie
+  m_text: Search Movie By Actor or Director
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b26f2d2036b743d581678572508c909, type: 2}
   m_sharedMaterial: {fileID: -3799678097681967946, guid: 5b26f2d2036b743d581678572508c909, type: 2}
@@ -2591,7 +2591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 315.4, y: -28.34}
+  m_AnchoredPosition: {x: 315.4, y: 68.11}
   m_SizeDelta: {x: 475.4, y: 154.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2012536011

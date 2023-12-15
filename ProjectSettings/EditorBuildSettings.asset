@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Review a Movie.unity
     guid: c0d922c51aaa34108976c5b6c193ef97
+  - enabled: 1
+    path: Assets/Scenes/Search Movie By Actor or Director.unity
+    guid: 169bda683125a4da497ce15f71ad0e68
   m_configObjects: {}

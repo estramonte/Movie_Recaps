@@ -18,9 +18,7 @@ public class ProfileHandler : MonoBehaviour
 
     public GameObject ProfileCanvas;
     public GameObject UpdateInformationCanvas;
-
-    public TextMeshProUGUI AreYouSure;
-    public Image areyousureBackground;
+    public GameObject AreYouSureCanvas;
 
     public TextMeshProUGUI bigUsername;
     public TextMeshProUGUI id;
@@ -29,11 +27,22 @@ public class ProfileHandler : MonoBehaviour
     public TextMeshProUGUI dob;
     public TextMeshProUGUI email;
     
+    // update info
+    public InputField usernameUpdateInputField;
+    public InputField passwordUpdateInputField;
+    public InputField emailUpdateInputField;
+    public InputField dobUpdateInputField;
+
+    public CSVDownloader csvDownloader;
+    
     // Start is called before the first frame update
     void Start()
     {
-        AreYouSure.text = " ";
-        areyousureBackground.enabled = false;
+        usernameUpdateInputField.enabled = false;
+        passwordUpdateInputField.enabled = false;
+        emailUpdateInputField.enabled = false;
+        dobUpdateInputField.enabled = false;
+        AreYouSureCanvas.SetActive(false);
         ProfileCanvas.SetActive(true);
         UpdateInformationCanvas.SetActive(false);
         DisplayUserInformation();
@@ -47,8 +56,6 @@ public class ProfileHandler : MonoBehaviour
         password.text = User.password;
         dob.text = User.dob.Substring(0, 10);
         email.text = User.email;
-        
-        // get
     }
 
     public void onViewReviewsButton()
@@ -60,23 +67,27 @@ public class ProfileHandler : MonoBehaviour
     {
         ProfileCanvas.SetActive(false);
         UpdateInformationCanvas.SetActive(true);
-        
-        // ask user to click buttons of attributes they want to update
-        // have them input new information
+    }
+
+    public void onSubmitButton()
+    {
+        string updatedUsername = usernameUpdateInputField.text;
+        string updatedPassword = passwordUpdateInputField.text;
+        string updatedEmail = emailUpdateInputField.text;
+        string updatedDOB = dobUpdateInputField.text;
+
+        // check if the string is full and then update user info with url FIX ME
     }
 
     public void onDeleteAccountButton()
     {
-        AreYouSure.text = "Are You Sure?";
-        areyousureBackground.enabled = true;
-        
-        // set yes and no buttons active
+        AreYouSureCanvas.SetActive(true);
+        ProfileCanvas.SetActive(false);
     }
 
     public void onYesButton()
     {
-        // delete account
-        
+        // delete account FIX ME
         
         User.id = string.Empty;
         User.username = string.Empty;
@@ -88,13 +99,33 @@ public class ProfileHandler : MonoBehaviour
 
     public void onNoButton()
     {
-        AreYouSure.text = " ";
-        areyousureBackground.enabled = false;
-        // set yes and no buttons inactive
+        AreYouSureCanvas.SetActive(false);
+        ProfileCanvas.SetActive(true);
     }
 
     public void onDownloadWatchlist()
     {
         // download watchlist to a csv file
+        csvDownloader.StartDownloadProcess();
+    }
+
+    public void onUsernameUpdateButton()
+    {
+        usernameUpdateInputField.enabled = true;
+    }
+    
+    public void onPasswordUpdateButton()
+    {
+        passwordUpdateInputField.enabled = true;
+    }
+    
+    public void onEmailUpdateButton()
+    {
+        emailUpdateInputField.enabled = true;
+    }
+    
+    public void onDOBUpdateButton()
+    {
+        dobUpdateInputField.enabled = true;
     }
 }
