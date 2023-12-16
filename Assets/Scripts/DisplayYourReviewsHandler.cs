@@ -56,11 +56,13 @@ public class DisplayYourReviewsHandler : MonoBehaviour
             } else {
                 ProcessReviews(webRequest.downloadHandler.text);
             }
+
         }
     }
     
     void ProcessReviews(string json) {
     var jsonObject = JObject.Parse(json);
+    print(jsonObject);
     var reviewsArray = jsonObject["result"] as JArray;
 
     if (reviewsArray != null) {
@@ -77,22 +79,22 @@ public class DisplayYourReviewsHandler : MonoBehaviour
             var properties = reviewData.Properties().SkipWhile(p => p.Name != "comments").Skip(1);
 
             foreach (var property in properties) {
-                var genreRating = property.Value?.ToObject<float?>();
+                if (property.Value.Type == JTokenType.Float || property.Value.Type == JTokenType.Integer) {
+                    var genreRating = property.Value.ToObject<float>();
 
-                if (genreRating.HasValue) {
                     // Assign the genre and its rating to the next available slot
                     switch (genresFound) {
                         case 0:
                             review.genre1 = property.Name;
-                            review.genre1Rating = genreRating.Value.ToString();
+                            review.genre1Rating = genreRating.ToString();
                             break;
                         case 1:
                             review.genre2 = property.Name;
-                            review.genre2Rating = genreRating.Value.ToString();
+                            review.genre2Rating = genreRating.ToString();
                             break;
                         case 2:
                             review.genre3 = property.Name;
-                            review.genre3Rating = genreRating.Value.ToString();
+                            review.genre3Rating = genreRating.ToString();
                             break;
                     }
 
@@ -101,8 +103,8 @@ public class DisplayYourReviewsHandler : MonoBehaviour
                         // Found three genres, no need to check further
                         break;
                     }
-                }
-            }
+    }
+}
 
             reviewsList.Add(review);
         }
