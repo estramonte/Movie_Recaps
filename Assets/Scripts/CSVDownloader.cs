@@ -98,7 +98,7 @@ public class CSVDownloader : MonoBehaviour
             string filePath = GetFilePath();
             string csvData = GenerateCSVData();
             File.WriteAllText(filePath, csvData);
-            Debug.Log(csvData);
+            Debug.Log("CSV file downloaded at: " + filePath);
         }
     }
 

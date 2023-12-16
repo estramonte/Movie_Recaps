@@ -19,6 +19,7 @@ public class ProfileHandler : MonoBehaviour
     public GameObject ProfileCanvas;
     public GameObject UpdateInformationCanvas;
     public GameObject AreYouSureCanvas;
+    public GameObject UserStatisticsCanvas;
 
     public TextMeshProUGUI bigUsername;
     public TextMeshProUGUI id;
@@ -45,6 +46,7 @@ public class ProfileHandler : MonoBehaviour
         AreYouSureCanvas.SetActive(false);
         ProfileCanvas.SetActive(true);
         UpdateInformationCanvas.SetActive(false);
+        UserStatisticsCanvas.SetActive(false);
         DisplayUserInformation();
     }
 
@@ -127,5 +129,11 @@ public class ProfileHandler : MonoBehaviour
     public void onDOBUpdateButton()
     {
         dobUpdateInputField.enabled = true;
+    }
+
+    public void onSeeUserStatistics()
+    {
+        UserStatisticsCanvas.SetActive(true);
+        ProfileCanvas.SetActive(false);
     }
 }
