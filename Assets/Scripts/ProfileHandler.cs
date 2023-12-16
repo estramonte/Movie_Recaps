@@ -4,9 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+
 
 public class ProfileHandler : MonoBehaviour
 {
+    
+    private string updateUrl = "http://localhost:3000/api/users/update";
+    private string deleteUrl = "http://localhost:3000/api/users/delete";
+
     public static class User
     {
         public static string id = string.Empty;
@@ -79,6 +85,47 @@ public class ProfileHandler : MonoBehaviour
         string updatedDOB = dobUpdateInputField.text;
 
         // check if the string is full and then update user info with url FIX ME
+        StartCoroutine(UpdateUserCoroutine(updatedUsername, updatedPassword, updatedEmail, updatedDOB));
+    }
+    
+    private IEnumerator UpdateUserCoroutine(string username, string password, string email, string dob)
+    {
+        WWWForm form = new WWWForm();
+        
+        form.AddField("id", User.id);
+
+        // Add the user's updated information to the form if they are not null or empty
+        if (!string.IsNullOrEmpty(username))
+        {
+            form.AddField("username", username);
+        }
+        if (!string.IsNullOrEmpty(password))
+        {
+            form.AddField("password", password);
+        }
+        if (!string.IsNullOrEmpty(email))
+        {
+            form.AddField("email", email);
+        }
+        if (!string.IsNullOrEmpty(dob))
+        {
+            form.AddField("dob", dob);
+        }
+
+        using (UnityWebRequest www = UnityWebRequest.Post(updateUrl, form))
+        {
+            // Send the request and wait for a response
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error updating user: " + www.error);
+            }
+            else
+            {
+                Debug.Log("User updated successfully");
+            }
+        }
     }
 
     public void onDeleteAccountButton()
@@ -89,7 +136,9 @@ public class ProfileHandler : MonoBehaviour
 
     public void onYesButton()
     {
-        // delete account FIX ME
+        // delete account 
+        StartCoroutine(DeleteUserCoroutine(User.id, User.username, User.password));
+
         
         User.id = string.Empty;
         User.username = string.Empty;
@@ -98,6 +147,32 @@ public class ProfileHandler : MonoBehaviour
         User.email = string.Empty;
         SceneManager.LoadScene("Title Screen");
     }
+    
+    private IEnumerator DeleteUserCoroutine(string userId, string username, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id", userId);
+        form.AddField("username", username);
+        form.AddField("password", password);
+
+        using (UnityWebRequest www = UnityWebRequest.Post(deleteUrl, form))
+        {
+            www.method = "DELETE"; // Manually set the method to DELETE
+
+            // Send the request and wait for a response
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error deleting user: " + www.error);
+            }
+            else
+            {
+                Debug.Log("User deleted successfully");
+            }
+        }
+    }
+
 
     public void onNoButton()
     {
@@ -107,7 +182,6 @@ public class ProfileHandler : MonoBehaviour
 
     public void onDownloadWatchlist()
     {
-        // download watchlist to a csv file
         csvDownloader.StartDownloadProcess();
     }
 
